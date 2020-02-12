@@ -1,6 +1,15 @@
 import React from "react";
 import axios from "axios";
-// import { Link } from "react-router-dom";
+import {
+	Card,
+	CardImg,
+	CardText,
+	CardBody,
+	CardTitle,
+	CardSubtitle,
+	Button
+} from "reactstrap";
+import styled from "styled-components";
 
 class FollowersCard extends React.Component {
 	state = {
@@ -21,17 +30,37 @@ class FollowersCard extends React.Component {
 
 	render() {
 		return (
-			<a href={this.state.followerinfo.html_url} target="_blank">
-				<div>
-					<img src={this.state.followerinfo.avatar_url} alt="User" />
-					<h3>{this.state.followerinfo.login}</h3>
-					<p>{this.state.followerinfo.name}</p>
-					<p>{this.state.followerinfo.location}</p>
-					<p>{this.state.followerinfo.bio}</p>
-				</div>
-			</a>
+			<StyledDiv>
+				<StyledCard body outline color="info">
+					<CardImg src={this.state.followerinfo.avatar_url} alt="User" />
+					<CardBody>
+						<CardTitle>
+							<h2>{this.state.followerinfo.login}</h2>
+                        </CardTitle>
+                        <hr/>
+						<CardSubtitle>
+							<p>{this.state.followerinfo.name}</p>
+						</CardSubtitle>
+						<CardText>
+							<p>{this.state.followerinfo.location}</p>
+							<p>{this.state.followerinfo.bio}</p>
+						</CardText>
+						<a href={this.state.followerinfo.html_url} target="_blank">
+							<Button color ="info">View Profile</Button>
+						</a>
+					</CardBody>
+				</StyledCard>
+			</StyledDiv>
 		);
 	}
 }
 
 export default FollowersCard;
+
+const StyledDiv = styled.div`
+    width: 35%;
+    margin-bottom: 3%;
+`;
+const StyledCard = styled(Card)`
+	background-color: rgb(0, 204, 255);
+`;

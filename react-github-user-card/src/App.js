@@ -28,15 +28,12 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<div className="App">
+			<div class="maincont">
 				<header>
 					<h1>Github User Card</h1>
 				</header>
-				<section>
+				<section class ="cardcont">
 					<UserCard user={this.state.user} />
-				</section>
-				<section>
-					<h2>Followers</h2>
 					{this.state.followers.map(follower => {
 						return <FollowersCard follower={follower} key={follower.id} />;
 					})}
