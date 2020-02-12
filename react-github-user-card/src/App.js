@@ -2,19 +2,25 @@ import React from "react";
 import "./App.css";
 import axios from "axios";
 import UserCard from "./components/UserCard";
+import FollowersCard from "./components/FollowersCard";
 
 class App extends React.Component {
 	state = {
-		user: []
+		user: [],
+		followers: []
 	};
 
 	componentDidMount() {
 		axios
-			.get("https://api.github.com/users/LeoSanchez89")
+			.all([
+				axios.get("https://api.github.com/users/LeoSanchez89"),
+				axios.get("https://api.github.com/users/LeoSanchez89/followers")
+			])
 			.then(response => {
-				// console.log(response.data);
+				// console.log(response[1].data);
 				this.setState({
-					user: response.data
+					user: response[0].data,
+					followers: response[1].data
 				});
 			})
 			.catch(err => console.log(err));
@@ -26,7 +32,15 @@ class App extends React.Component {
 				<header>
 					<h1>Github User Card</h1>
 				</header>
-				<UserCard user={this.state.user} />
+				<section>
+					<UserCard user={this.state.user} />
+				</section>
+				<section>
+					<h2>Followers</h2>
+					{this.state.followers.map(follower => {
+						return <FollowersCard follower={follower} key={follower.id} />;
+					})}
+				</section>
 			</div>
 		);
 	}
