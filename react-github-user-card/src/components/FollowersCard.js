@@ -10,6 +10,7 @@ import {
 	Button
 } from "reactstrap";
 import styled from "styled-components";
+import { FaMapMarkerAlt } from "react-icons/fa";
 
 class FollowersCard extends React.Component {
 	state = {
@@ -39,10 +40,10 @@ class FollowersCard extends React.Component {
                         </CardTitle>
                         <hr/>
 						<CardSubtitle>
-							<p>{this.state.followerinfo.name}</p>
+							<h3>{this.state.followerinfo.name}</h3>
 						</CardSubtitle>
 						<CardText>
-							<p>{this.state.followerinfo.location}</p>
+							<p><FaMapMarkerAlt/>{this.state.followerinfo.location}</p>
 							<p>{this.state.followerinfo.bio}</p>
 						</CardText>
 						<a href={this.state.followerinfo.html_url} target="_blank">
